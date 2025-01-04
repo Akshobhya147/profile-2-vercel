@@ -1,0 +1,34 @@
+*{
+    margin: none;
+    padding: none;
+}
+body{
+    background-color: black;
+    color: aliceblue;
+    cursor:default;
+    /* cursor: url("/cursor3.png"),auto ; */
+}
+
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .html{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+canvas{
+    min-height: 100svh;
+    /* height:min-content; */
+    /* cursor: url("./public/cursor3.png"),auto ; */
+    cursor:default;
+}
+
+.projects_canvas{
+    height: 1200svh;
+}
+
+
+
