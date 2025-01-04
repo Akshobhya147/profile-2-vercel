@@ -82,8 +82,8 @@ function Home({ isMobile, isTablet, isIpadPro }: Media) {
         <pointLight
           key={"light1"}
           position={
-            (isMobile && [0, -1, 0]) ||
-            (isTablet && [-2.6, 0.8, 0]) ||
+            (isMobile && [-1, 2, 0.25]) ||
+            (isTablet && [-1, 2, 0.25]) ||
             (isIpadPro && [5, -4, 0]) || [-2, 2, 0.2]
           }
           intensity={
@@ -100,7 +100,7 @@ function Home({ isMobile, isTablet, isIpadPro }: Media) {
         <pointLight
           key={"light2"}
           position={
-            (isMobile && [1, -1, 0]) ||
+            (isMobile && [0.5, -1, 0.5]) ||
             (isTablet && [-2.6, 0.8, 0]) ||
             (isIpadPro && [-2, -3, 0]) || [-2, 0, 0]
           }
@@ -119,7 +119,7 @@ function Home({ isMobile, isTablet, isIpadPro }: Media) {
           key={"light3"}
           position={
             (isMobile && [1, -1, 0]) ||
-            (isTablet && [-2.6, 0.8, 0]) ||
+            (isTablet && [-1, -0.5, 0.4]) ||
             (isIpadPro && [-2, -3, 0]) || [2, 0, 0]
           }
           intensity={
@@ -160,9 +160,9 @@ function Home({ isMobile, isTablet, isIpadPro }: Media) {
           azimuth={[-Math.PI / 2, Math.PI / 2]}
         >
           <Float
-            speed={0.8}
+            speed={1}
             scale={1}
-            floatIntensity={0.1}
+            floatIntensity={1}
             floatingRange={[0.01, 0.01]}
           >
             <Text3D
@@ -194,9 +194,9 @@ function Home({ isMobile, isTablet, isIpadPro }: Media) {
             </Text3D>
           </Float>
           <Float
-            speed={0.8}
+            speed={1}
             scale={1}
-            floatIntensity={0.1}
+            floatIntensity={1}
             floatingRange={[0.01, 0.01]}
           >
             <Text3D
