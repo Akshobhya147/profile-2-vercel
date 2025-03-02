@@ -11,7 +11,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
-  const [hover, seHoverState] = useState(false);
+  const [backHover, setBackHoverState] = useState(false);
+  const [nextHover, setNextHoverState] = useState(false);
   const navigate = useNavigate();
 
   const H2 = new Array(
@@ -36,6 +37,7 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
     // add new projects here.
     // if number of projects becomes 5, create a similar projects3
     // and below, in the return, create another Canvas element.
+    //also, map next button accordingly, and remove back button from this array's canvas.
     ["     Smart Dashcam", "smartdashcam", "route"],
     ["       \n       Beach Volley", "beachvolley", "route"],
     ["\n\n       Block Puzzle", "blockpuzzle", "route"],
@@ -131,6 +133,24 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
           }
           color={"white"}
         />
+        <pointLight
+          key={"light4"}
+          position={
+            (isMobile && [0.6, -2, 0.3]) ||
+            (isTablet && [0.8, -2, 0.3]) ||
+            (isIpadPro && [3, -2, 0.2]) || [3, -2, 0.2]
+          }
+          intensity={
+            (isMobile && 1500) ||
+            (isTablet && 1200) ||
+            (isIpadPro && 1200) ||
+            1000
+          }
+          power={
+            (isMobile && 500) || (isTablet && 200) || (isIpadPro && 500) || 500
+          }
+          color={"white"}
+        />
         <Float speed={0} scale={0.8} floatIntensity={-1} floatingRange={[0, 0]}>
           <Text3D
             font={"/Blogh Trial_Regular.json"}
@@ -140,7 +160,7 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
               (isIpadPro && [-6.8, 3.5, 0]) || [-6, 3, 1]
             }
             size={
-              hover
+              backHover
                 ? (isMobile && 0.3) ||
                   (isTablet && 0.38) ||
                   (isIpadPro && 0.46) ||
@@ -157,15 +177,55 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
             }
             onPointerOver={() => {
               // console.log(navEle + "hover");
-              seHoverState(true);
+              setBackHoverState(true);
             }}
             onPointerOut={() => {
               // console.log(navEle + "hover");
-              seHoverState(false);
+              setBackHoverState(false);
             }}
             onClick={() => navigate(backLink)}
           >
             Back
+            <meshStandardMaterial
+              color="#0059d6"
+              emissive="#0059d6"
+              emissiveIntensity={0.7}
+            />
+          </Text3D>
+          <Text3D
+            font={"/Blogh Trial_Regular.json"}
+            position={
+              (isMobile && [0.8, -3.5, 0.8]) ||
+              (isTablet && [1.2, -3.5, 0.8]) ||
+              (isIpadPro && [-5, -3.5, 0.8]) || [5, -3.5, 0.8]
+            }
+            size={
+              nextHover
+                ? (isMobile && 0.3) ||
+                  (isTablet && 0.38) ||
+                  (isIpadPro && 0.46) ||
+                  0.4
+                : (isMobile && 0.25) ||
+                  (isTablet && 0.32) ||
+                  (isIpadPro && 0.4) ||
+                  0.36
+            }
+            rotation={
+              (isMobile && [-0.3, 0, 0]) ||
+              (isTablet && [-0.2, 0, 0]) ||
+              (isIpadPro && [0, 0, 0]) || [0, -0.1, 0.05]
+            }
+            onPointerOver={() => {
+              // console.log(navEle + "hover");
+              setNextHoverState(true);
+            }}
+            onPointerOut={() => {
+              // console.log(navEle + "hover");
+              setNextHoverState(false);
+            }}
+            onClick={() => window.open("/projects#1", "_self")}
+          >
+            Next
             <meshStandardMaterial
               color="#0059d6"
               emissive="#0059d6"
@@ -208,33 +268,6 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
           </Text3D>
         </Float>
 
-        <Text3D
-          font={"/Blogh Trial_Regular.json"}
-          position={
-            (isMobile && [-0.6, 1.2, 0]) ||
-            (isTablet && [-0.75, 1.3, 0]) ||
-            (isIpadPro && [-0.9, 1, 0]) || [-0.9, 1, 0]
-          }
-          size={
-            (isMobile && 0.3) ||
-            (isTablet && 0.35) ||
-            (isIpadPro && 0.35) ||
-            0.35
-          }
-          rotation={
-            (isMobile && [0, 0, 0]) ||
-            (isTablet && [0, 0, 0]) ||
-            (isIpadPro && [0, 0, 0]) || [0, 0, 0]
-          }
-        >
-          Latest
-          <meshStandardMaterial
-            color="#0059d6"
-            emissive="#0059d6"
-            emissiveIntensity={0.7}
-          />
-        </Text3D>
-
         <Float
           speed={0.8}
           scale={1}
@@ -247,9 +280,9 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
                 <Text3D
                   font={"/Blogh Trial_Regular.json"}
                   position={
-                    (isMobile && [-2.3, 0.4, 0]) ||
-                    (isTablet && [-2.8, 0.3, 0]) ||
-                    (isIpadPro && [-3.6, 0, 0]) || [-3.6, 0, 0]
+                    (isMobile && [-2.3, 0.9, 0]) ||
+                    (isTablet && [-2.8, 0.8, 0]) ||
+                    (isIpadPro && [-3.6, 0.5, 0]) || [-3.6, 0.5, 0]
                   }
                   size={
                     H2[index][0]
@@ -295,7 +328,7 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
         </Float>
       </Canvas>
 
-      <Canvas className="projects_canvas" id="2">
+      <Canvas className="projects_canvas" id="1">
         <Stars
           radius={50}
           depth={50}
@@ -360,32 +393,6 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
           }
           color={"white"}
         />
-        <Text3D
-          font={"/Blogh Trial_Regular.json"}
-          position={
-            (isMobile && [-0.36, 3, 0]) ||
-            (isTablet && [-0.4, 3, 0]) ||
-            (isIpadPro && [-0.5, 3, 0]) || [-0.5, 3, 0]
-          }
-          size={
-            (isMobile && 0.3) ||
-            (isTablet && 0.35) ||
-            (isIpadPro && 0.35) ||
-            0.35
-          }
-          rotation={
-            (isMobile && [0, 0, 0]) ||
-            (isTablet && [0, 0, 0]) ||
-            (isIpadPro && [0, 0, 0]) || [0, 0, 0]
-          }
-        >
-          Old
-          <meshStandardMaterial
-            color="#0059d6"
-            emissive="#0059d6"
-            emissiveIntensity={0.7}
-          />
-        </Text3D>
         <Float
           speed={0.8}
           scale={1}
@@ -398,9 +405,9 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
                 <Text3D
                   font={"/Blogh Trial_Regular.json"}
                   position={
-                    (isMobile && [-2.25, 2.1, 0]) ||
-                    (isTablet && [-2.7, 2, 0]) ||
-                    (isIpadPro && [-3.6, 2, 0]) || [-3.6, 2, 0]
+                    (isMobile && [-2.25, 2.6, 0]) ||
+                    (isTablet && [-2.7, 2.5, 0]) ||
+                    (isIpadPro && [-3.6, 2.5, 0]) || [-3.6, 2.5, 0]
                   }
                   size={
                     H1[index][0]
