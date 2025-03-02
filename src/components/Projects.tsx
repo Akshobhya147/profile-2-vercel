@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
   const [backHover, setBackHoverState] = useState(false);
   const [nextHover, setNextHoverState] = useState(false);
+  const [hideNext, setHideNextState] = useState(false);
   const navigate = useNavigate();
 
   const H2 = new Array(
@@ -37,7 +38,7 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
     // add new projects here.
     // if number of projects becomes 5, create a similar projects3
     // and below, in the return, create another Canvas element.
-    //also, map next button accordingly, and remove back button from this array's canvas.
+    //also, put next and back button only in first canvas (in order of view).
     ["     Smart Dashcam", "smartdashcam", "route"],
     ["       \n       Beach Volley", "beachvolley", "route"],
     ["\n\n       Block Puzzle", "blockpuzzle", "route"],
@@ -201,14 +202,18 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
             }
             size={
               nextHover
-                ? (isMobile && 0.3) ||
-                  (isTablet && 0.38) ||
-                  (isIpadPro && 0.46) ||
-                  0.4
-                : (isMobile && 0.25) ||
-                  (isTablet && 0.32) ||
-                  (isIpadPro && 0.4) ||
-                  0.36
+                ? !hideNext
+                  ? (isMobile && 0.3) ||
+                    (isTablet && 0.38) ||
+                    (isIpadPro && 0.46) ||
+                    0.4
+                  : 0
+                : !hideNext
+                  ? (isMobile && 0.25) ||
+                    (isTablet && 0.32) ||
+                    (isIpadPro && 0.4) ||
+                    0.36
+                  : 0
             }
             rotation={
               (isMobile && [-0.3, 0, 0]) ||
@@ -223,7 +228,11 @@ const Projects = ({ isMobile, isTablet, isIpadPro, backLink = "/" }: Media) => {
               // console.log(navEle + "hover");
               setNextHoverState(false);
             }}
-            onClick={() => window.open("/projects#1", "_self")}
+            onClick={() => {
+              window.open("/projects#1", "_self");
+              setHideNextState(true);
+              console.log(hideNext);
+            }}
           >
             Next
             <meshStandardMaterial
